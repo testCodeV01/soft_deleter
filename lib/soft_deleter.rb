@@ -54,6 +54,10 @@ module SoftDeleter
     self.deleted_at.nil?
   end
 
+  def deleter
+    self.deleter_type.find_by(id: self.deleter_id)
+  end
+
   protected
 
   def with_associations(callback, deleter = nil)

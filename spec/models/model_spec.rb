@@ -198,4 +198,14 @@ RSpec.describe SoftDeleter do
       end
     end
   end
+
+  describe "#deleter_type" do
+    before do
+      user_1.soft_delete(admin)
+    end
+
+    it "can find soft_delete user" do
+      expect(user_1.deleter).to eq admin
+    end
+  end
 end
