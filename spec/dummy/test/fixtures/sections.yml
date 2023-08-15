@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  book: one
+  title: MyString
+  deleter_type: MyString
+  deleter_id: 1
+  deleted_at: 2023-08-15 23:00:58
+
+two:
+  book: two
+  title: MyString
+  deleter_type: MyString
+  deleter_id: 1
+  deleted_at: 2023-08-15 23:00:58
