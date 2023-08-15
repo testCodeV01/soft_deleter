@@ -111,7 +111,7 @@ RSpec.describe SoftDeleter do
     end
   end
 
-  describe "#deleted_account_type" do
+  describe "#deleter_type" do
     context "no arguments" do
       before do
         user_1.soft_delete
@@ -131,9 +131,15 @@ RSpec.describe SoftDeleter do
         expect(user_1.deleter_type).to eq Admin
       end
     end
+
+    context "when not soft deleted" do
+      it "will return nil" do
+        expect(user_1.deleter_type).to eq nil
+      end
+    end
   end
 
-  describe "#deleted_account_id" do
+  describe "#deleter_id" do
     context "no arguments" do
       before do
         user_1.soft_delete
@@ -151,6 +157,12 @@ RSpec.describe SoftDeleter do
 
       it "admin.id is setted" do
         expect(user_1.deleter_id).to eq admin.id
+      end
+    end
+
+    context "when not soft deleted" do
+      it "will return nil" do
+        expect(user_1.deleter_id).to eq nil
       end
     end
   end
@@ -199,13 +211,21 @@ RSpec.describe SoftDeleter do
     end
   end
 
-  describe "#deleter_type" do
-    before do
-      user_1.soft_delete(admin)
+  describe "#deleter" do
+    context "when soft deleted" do
+      before do
+        user_1.soft_delete(admin)
+      end
+  
+      it "can find soft_delete user" do
+        expect(user_1.deleter).to eq admin
+      end
     end
 
-    it "can find soft_delete user" do
-      expect(user_1.deleter).to eq admin
+    context "when not soft deleted" do
+      it "will return nil" do
+        expect(user_1.deleter).to eq nil
+      end
     end
   end
 end

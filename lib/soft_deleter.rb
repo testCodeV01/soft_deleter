@@ -43,7 +43,7 @@ module SoftDeleter
   end
 
   def deleter_type
-    self[:deleter_type].constantize
+    self[:deleter_type].constantize if self.soft_deleted?
   end
 
   def soft_deleted?
@@ -55,7 +55,7 @@ module SoftDeleter
   end
 
   def deleter
-    self.deleter_type.find_by(id: self.deleter_id)
+    self.deleter_type&.find_by(id: self.deleter_id)
   end
 
   protected
