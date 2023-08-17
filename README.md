@@ -71,7 +71,7 @@ user.alive?                # => false
 
 ## Feature
 Let associations some models, User, Book, Section.
-```
+```ruby
 # User model
 class User < ApplicationRecord
   include SoftDeleter
