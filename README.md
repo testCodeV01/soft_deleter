@@ -70,7 +70,28 @@ user.alive?                # => false
 ```
 
 ## Feature
+Let associations some models, User, Book, Section.
+```
+# User model
+class User < ApplicationRecord
+  include SoftDeleter
+  has_many :books, dependent: :destroy
+end
 
+# Book model
+class Book < ApplicationRecord
+  include SoftDeleter
+  belongs_to :user
+  has_many :sections, dependent: :destroy
+end
+
+# Section model
+class Section < ApplicationRecord
+  include SoftDeleter
+  belongs_to :book
+end
+```
+So, if you excute `user.soft_delete`, then associations books, and sections are delete soft.
 
 
 ## Contributing
