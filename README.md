@@ -52,7 +52,7 @@ When you load users whitout soft deleted records, you need to scope like bellow.
 users = User.enabled.all
 ```
 If you don't use enabled scope, you will load users in all records including soft deleted.<br />
-Otherwise, you need to load records with soft deleted, excute like bellow.
+Otherwise, if you need to load records with soft deleted, excute like bellow.
 ```ruby
 deleted_users = User.deleted.all
 ```
