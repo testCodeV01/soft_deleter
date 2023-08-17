@@ -69,7 +69,7 @@ user.soft_deleted?         # => true
 user.alive?                # => false
 ```
 
-## Feature
+## Associations
 Let associations some models, User, Book, Section.
 ```ruby
 # User model
