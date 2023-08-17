@@ -44,7 +44,7 @@ class User < ApplicationRecord
   include SoftDeleter
 end
 ```
-This line is added automatically if you use `rails g soft_deleter` command to make user model.
+This line is added automatically if you use `rails g soft_deleter user` command to make user model.
 
 ### Soft delete
 ```ruby
