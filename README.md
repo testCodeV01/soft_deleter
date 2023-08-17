@@ -91,7 +91,8 @@ class Section < ApplicationRecord
   belongs_to :book
 end
 ```
-So, if you excute `user.soft_delete`, then associations books, and sections are delete soft.
+So, if you excute `user.soft_delete`, then associations books, and sections are delete soft.<br />
+And excute `user.restore`, then associations books, and sections are restored.
 
 
 ## Contributing
