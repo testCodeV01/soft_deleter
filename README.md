@@ -37,6 +37,8 @@ class AddSoftDeleterAttributesToUsers < ActiveRecord::Migration[7.0]
 end
 ```
 and `bundle exec rails db:migrate`<br />
+Here, `deleter_type` and `deleter_id`, these are the infomations who soft delete.<br />
+Like `current_admin`, when admin which is "Admin" class does soft delete user record, admin's class name and id can be recorded.
 <br />
 And add line to model
 ```ruby
