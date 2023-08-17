@@ -92,7 +92,8 @@ class Section < ApplicationRecord
 end
 ```
 So, if you excute `user.soft_delete`, then associations books, and sections are delete soft.<br />
-And excute `user.restore`, then associations books, and sections are restored.
+And excute `user.restore`, then associations books, and sections are restored.<br />
+It works if dependent destroy description. If not, it doesn't work.
 
 
 ## Contributing
