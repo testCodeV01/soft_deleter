@@ -19,13 +19,16 @@ $ gem install soft_deleter
 ```
 
 ## Usage
-### Introdue
+### Introduce
 Soft delete model User.
 ```
 bundle exec rails g soft_deleter user
 ```
-It creates migration file to create user with soft delete attributes.<br/>
-Or if you already have User model, and you want make user model have attributes,
+It creates migration file to create user with attributes which is needed to introduce soft delete.<br/>
+Add some attributes to migration file, like name, email, age, ...etc.<br />
+And excute `bundle exec rails db:migrate`. That's all.<br />
+<br />
+Or if you already have User model, and you want introduce soft delete in it,
 create migration file and add lines like bellow
 ```ruby
 class AddSoftDeleterAttributesToUsers < ActiveRecord::Migration[7.0]
