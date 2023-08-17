@@ -71,7 +71,7 @@ user.alive?                # => false
 ```
 
 ## Associations
-Let associations some models, User, Book, Section.
+If associations some models, User, Book, Section.
 ```ruby
 # User model
 class User < ApplicationRecord
