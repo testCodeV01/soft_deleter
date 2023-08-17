@@ -1,8 +1,5 @@
 # SoftDeleter
-Short description and motivation.
-
-## Usage
-How to use my plugin.
+soft delete Rails plugin.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -20,6 +17,22 @@ Or install it yourself as:
 ```bash
 $ gem install soft_deleter
 ```
+
+## Usage
+soft delete model User.
+```
+bundle exec rails g soft_deleter user
+```
+it create migration file to create user with soft delete attributes.
+or if you already have User model, and you want make user model have attributes,
+create migration file and add these lines
+```
+  t.string :deleter_type
+  t.integer :deleter_id
+  t.timestamp :deleted_at
+```
+and `bundle exec rails db:migrate`
+
 
 ## Contributing
 Contribution directions go here.
