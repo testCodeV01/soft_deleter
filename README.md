@@ -58,7 +58,7 @@ user.soft_delete!(admin)   # raise if fail soft delete
 user.deleter               # => <Admin:0x00007f37f96a0c88
 user.deleter_type          # => Admin(id: integer, ...
 user.soft_deleted?         # => true
-usr.alive?                 # => false
+user.alive?                 # => false
 ```
 
 
