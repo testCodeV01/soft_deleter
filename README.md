@@ -20,11 +20,11 @@ $ gem install soft_deleter
 
 ## Usage
 ### Introdue
-soft delete model User.
+Soft delete model User.
 ```
 bundle exec rails g soft_deleter user
 ```
-It create migration file to create user with soft delete attributes.<br/>
+It creates migration file to create user with soft delete attributes.<br/>
 Or if you already have User model, and you want make user model have attributes,
 create migration file and add lines like bellow
 ```ruby
@@ -94,7 +94,7 @@ end
 ```
 So, if you excute `user.soft_delete`, then associations books, and sections are soft deleted.<br />
 And excute `user.restore`, then associations books, and sections are restored.<br />
-It works if dependent destroy description. If not, it doesn't work.
+It works with dependent destroy descriptions. If not, it doesn't work.
 
 
 ## Contributing
