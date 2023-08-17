@@ -14,13 +14,13 @@ $ bundle
 ```
 
 Or install it yourself as:
-```ruby
+```
 $ gem install soft_deleter
 ```
 
 ## Usage
 soft delete model User.
-```ruby
+```
 bundle exec rails g soft_deleter user
 ```
 it create migration file to create user with soft delete attributes.
