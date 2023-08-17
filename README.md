@@ -50,7 +50,7 @@ This line is added automatically if you use `rails g soft_deleter user` command 
 ```ruby
 user = User.first
 user.soft_delete           # soft delete
-user.soft_delete!          # soft delete and raise if fail to soft delete
+user.soft_delete!          # soft delete or raise if fail to soft delete
 user.restore               # restore soft deleted user
 ```
 If your app have some models other than user, like `Admin` model,<br />
