@@ -39,7 +39,7 @@ end
 and `bundle exec rails db:migrate`
 
 ### Soft delete
-```
+```ruby
 user = User.first
 user.soft_delete           # soft delete
 user.soft_delete!          # soft delete and raise if fail soft delete
@@ -48,7 +48,7 @@ user.restore               # restore soft deleted user
 If your App have some models other than user, like `Admin` model,<br />
 and you need to record to that Admin account did soft delete.<br />
 Then,
-```
+```ruby
 admin = Admin.first        # admin to delete soft
 user.soft_delete(admin)    # soft delete and soft_deleter is admin
 user.soft_delete!(admin)   # raise if fail soft delete
