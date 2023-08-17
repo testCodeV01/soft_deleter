@@ -36,7 +36,14 @@ class AddSoftDeleterAttributesToUsers < ActiveRecord::Migration[7.0]
   end
 end
 ```
-and `bundle exec rails db:migrate`
+and `bundle exec rails db:migrate`<br />
+<br />
+And add line to model
+```ruby
+class User < ApplicationRecord
+  include SoftDeleter
+end
+```
 
 ### Soft delete
 ```ruby
@@ -60,6 +67,9 @@ user.deleter_type          # => Admin(id: integer, ...
 user.soft_deleted?         # => true
 user.alive?                 # => false
 ```
+
+## Feature
+
 
 
 ## Contributing
