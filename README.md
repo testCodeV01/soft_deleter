@@ -49,6 +49,8 @@ If your App have some models other than user, like `Admin` model,<br />
 and you need to record to that Admin account did soft delete.<br />
 Then,
 ```ruby
+user = User.first
+
 admin = Admin.first        # admin to delete soft
 user.soft_delete(admin)    # soft delete and soft_deleter is admin
 user.soft_delete!(admin)   # raise if fail soft delete
