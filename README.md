@@ -46,28 +46,39 @@ end
 ```
 This line is added automatically if you use `rails g soft_deleter user` command to make user model.
 
+### scope
+When you load users whitout soft deleted records, you need to scope like bellow.
+```
+users = User.enabled.all
+```
+If you don't use enabled scope, you will load users in all records including soft deleted.<br />
+Otherwise, you need to load records with soft deleted, excute like bellow.
+```
+deleted_users = User.deleted.all
+```
+
 ### Soft delete
 ```ruby
-user = User.first
-user.soft_delete           # soft delete
-user.soft_delete!          # soft delete or raise if fail to soft delete
-user.restore               # restore soft deleted user
+user = User.enabled.first
+user.soft_delete                 # soft delete
+user.soft_delete!                # soft delete or raise if fail to soft delete
+user.restore                     # restore soft deleted user
 ```
 If your app have some models other than user, like `Admin` model,<br />
 and you need to record to that Admin user did soft delete.<br />
 Then,
 ```ruby
-user = User.first
+user = User.enabled.first
 
-admin = Admin.first        # soft deleted by admin user
-user.soft_delete(admin)    # soft delete and set admin to deleter
-user.soft_delete!(admin)   # raise if fail to soft delete
+admin = Admin.enabled.first     # soft deleted by admin user
+user.soft_delete(admin)         # soft delete and set admin to deleter
+user.soft_delete!(admin)        # raise if fail to soft delete
 
-user.deleter               # => <Admin:0x00007f37f96a0c88
-user.deleter_type          # => Admin(id: integer, ...
-user.deleter_id            # => "admin.id" if deleter is not set, "user.id"
-user.soft_deleted?         # => true
-user.alive?                # => false
+user.deleter                    # => <Admin:0x00007f37f96a0c88
+user.deleter_type               # => Admin(id: integer, ...
+user.deleter_id                 # => "admin.id" if deleter is not set, "user.id"
+user.soft_deleted?              # => true
+user.alive?                     # => false
 ```
 
 ## Associations
