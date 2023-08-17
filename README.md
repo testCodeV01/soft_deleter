@@ -54,12 +54,12 @@ user.soft_delete!          # soft delete or raise if fail to soft delete
 user.restore               # restore soft deleted user
 ```
 If your app have some models other than user, like `Admin` model,<br />
-and you need to record to that Admin account did soft delete.<br />
+and you need to record to that Admin user did soft delete.<br />
 Then,
 ```ruby
 user = User.first
 
-admin = Admin.first        # admin to soft delete
+admin = Admin.first        # soft deleted by admin user
 user.soft_delete(admin)    # soft delete and set admin to deleter
 user.soft_delete!(admin)   # raise if fail to soft delete
 
