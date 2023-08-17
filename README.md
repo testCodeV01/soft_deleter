@@ -50,7 +50,7 @@ This line is added automatically if you use `rails g soft_deleter user` command 
 ```ruby
 user = User.first
 user.soft_delete           # soft delete
-user.soft_delete!          # soft delete and raise if fail soft delete
+user.soft_delete!          # soft delete and raise if fail to soft delete
 user.restore               # restore soft deleted user
 ```
 If your app have some models other than user, like `Admin` model,<br />
@@ -59,13 +59,13 @@ Then,
 ```ruby
 user = User.first
 
-admin = Admin.first        # admin to delete soft
-user.soft_delete(admin)    # soft delete and soft_deleter is admin
-user.soft_delete!(admin)   # raise if fail soft delete
+admin = Admin.first        # admin to soft delete
+user.soft_delete(admin)    # soft delete and set admin to deleter
+user.soft_delete!(admin)   # raise if fail to soft delete
 
 user.deleter               # => <Admin:0x00007f37f96a0c88
 user.deleter_type          # => Admin(id: integer, ...
-user.deleter_id            # => "admin.id" if soft deleter is not set, "user.id"
+user.deleter_id            # => "admin.id" if deleter is not set, "user.id"
 user.soft_deleted?         # => true
 user.alive?                # => false
 ```
@@ -92,7 +92,7 @@ class Section < ApplicationRecord
   belongs_to :book
 end
 ```
-So, if you excute `user.soft_delete`, then associations books, and sections are delete soft.<br />
+So, if you excute `user.soft_delete`, then associations books, and sections are soft deleted.<br />
 And excute `user.restore`, then associations books, and sections are restored.<br />
 It works if dependent destroy description. If not, it doesn't work.
 
