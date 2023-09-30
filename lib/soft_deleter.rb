@@ -34,12 +34,26 @@ module SoftDeleter
     end
 
     true
+  rescue ActiveRecord::RecordInvalid
+    false
+  end
+
+  def restore!
+    ActiveRecord::Base.transaction do
+      with_associations(:restore_without_associations!)
+    end
+
+    true
   end
 
   def restore
     ActiveRecord::Base.transaction do
       with_associations(:restore_without_associations)
     end
+
+    true
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   def deleter_type
@@ -75,6 +89,8 @@ module SoftDeleter
   private
 
   def soft_delete_witout_associations!(deleter)
+    raise ActiveRecord::RecordInvalid, self if invalid?
+
     update!(
       deleter_type: deleter.class.to_s,
       deleter_id: deleter.id,
@@ -83,6 +99,8 @@ module SoftDeleter
   end
 
   def soft_delete_witout_associations(deleter)
+    raise ActiveRecord::RecordInvalid if invalid?
+
     update(
       deleter_type: deleter.class.to_s,
       deleter_id: deleter.id,
@@ -90,7 +108,19 @@ module SoftDeleter
     )
   end
 
+  def restore_without_associations!
+    raise ActiveRecord::RecordInvalid, self if invalid?
+
+    update(
+      deleter_type: nil,
+      deleter_id: nil,
+      deleted_at: nil
+    )
+  end
+
   def restore_without_associations
+    raise ActiveRecord::RecordInvalid if invalid?
+
     update(
       deleter_type: nil,
       deleter_id: nil,
