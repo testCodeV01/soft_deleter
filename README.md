@@ -66,8 +66,9 @@ deleted_users = User.deleted.all
 ```ruby
 user = User.enabled.first
 user.soft_delete                 # soft delete
-user.soft_delete!                # soft delete or raise if fail to soft delete
+user.soft_delete!                # soft delete or raise when fail occurs
 user.restore                     # restore soft deleted user
+user.restore!                    # restore soft deleted user or raise when fail occurs
 ```
 If your app have some models other than user, like `Admin` model,<br />
 and you need to record to that Admin user did soft delete.<br />
