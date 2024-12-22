@@ -16,7 +16,7 @@ module SoftDeleter
 
         i.options[:class_name]&.underscore&.pluralize&.to_sym || i.name
       end.compact
-      result
+      result - [:"active_storage/attachments"]
     end
   end
 
