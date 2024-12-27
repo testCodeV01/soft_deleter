@@ -84,7 +84,13 @@ module SoftDeleter
       if child.respond_to?(:with_associations, true)
         child.with_associations(callback, deleter)
       else
-        child.send(:"destroy#{callback.to_s.last == "!" ? "!" : ""}")
+        if callback == :soft_delete_witout_associations!
+          child.destroy!
+        elsif callback == :soft_delete_witout_associations
+          child.destroy
+        else
+          child.send(callback) if child.respond_to?(callback, true)
+        end
       end
     end
 
