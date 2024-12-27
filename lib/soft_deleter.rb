@@ -80,7 +80,13 @@ module SoftDeleter
       self.send(child_table)
     end.flatten
 
-    childs.compact.each { |child| child.with_associations(callback, deleter) }
+    childs.compact.each do |child|
+      if child.respond_to?(:with_associations, true)
+        child.with_associations(callback, deleter)
+      else
+        child.send(:"destroy#{callback.to_s.last == "!" ? "!" : ""}")
+      end
+    end
 
     send(callback, deleter) if deleter.present?
     send(callback) if deleter.blank?
