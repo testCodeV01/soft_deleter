@@ -14,7 +14,7 @@ module SoftDeleter
       result = %i[has_many has_one].map { |a| self.reflect_on_all_associations(a) }.flatten.filter_map do |i|
         next unless %i[destroy delete delete_all].include?(i.options[:dependent]) && i.options.keys.exclude?(:through)
 
-        i.options[:class_name]&.underscore&.pluralize&.to_sym || i.name
+        i.name || i.options[:class_name]&.underscore&.pluralize&.to_sym
       end.compact
       result - [:"active_storage/attachments"]
     end
