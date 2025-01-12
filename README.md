@@ -34,7 +34,7 @@ create migration file and add lines like bellow
 class AddSoftDeleterAttributesToUsers < ActiveRecord::Migration[7.0]
   def change
     add_column :users, :deleter_type, :string
-    add_column :users, :deleter_id, :integer
+    add_column :users, :deleter_id, :bigint
     add_column :users, :deleted_at, :timestamp
   end
 end
