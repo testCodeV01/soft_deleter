@@ -10,7 +10,7 @@ class SoftDeleterGenerator < Rails::Generators::NamedBase
       arg += "{#{attr.attr_options[:limit]}}" if attr.attr_options.present?
       arg
     end.join(" ")
-    
+
     system("bundle exec rails g model #{name} #{add_attributes} deleter_type:string deleter_id:integer deleted_at:timestamp")
     system("sed -e '2i \\  include SoftDeleter' app/models/#{snake_name}.rb > app/models/_tmp.rb")
     system("rm app/models/#{snake_name}.rb")

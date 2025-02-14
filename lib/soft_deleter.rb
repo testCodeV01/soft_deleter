@@ -4,6 +4,8 @@ require "soft_deleter/railtie"
 module SoftDeleter
   extend ActiveSupport::Concern
 
+  @@exclude_dependents = []
+
   included do
     scope :enabled, -> { where(deleted_at: nil) }
     scope :deleted, -> { where.not(deleted_at: nil) }
@@ -16,7 +18,14 @@ module SoftDeleter
 
         i.name || i.options[:class_name]&.underscore&.pluralize&.to_sym
       end.compact
-      result - [:"active_storage/attachments"]
+      result - [:"active_storage/attachments"] - @@exclude_dependents
+    end
+
+    def exclude_dependent(names, option = {})
+      dependents = [names].flatten
+      dependents = dependents.map { |name| :"#{name}_#{option.dig(:sufix)}" } if option.dig(:sufix).present?
+
+      @@exclude_dependents += dependents
     end
   end
 
