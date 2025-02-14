@@ -132,7 +132,7 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many_attached :images
 
-  exclude_dependent :images_attachments
+  exclude_dependent :images_attachments # this line
 end
 ```
 `exclude_dependent` accepts array of symbols as arguments.
@@ -152,7 +152,7 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many_attached :images
 
-  exclude_dependent :images, suffix: :attachments
+  exclude_dependent :images, suffix: :attachments # this line
 end
 ```
 
