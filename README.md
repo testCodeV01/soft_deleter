@@ -136,6 +136,7 @@ class Book < ApplicationRecord
 end
 ```
 `exclude_dependent` accepts array of symbols as arguments.
+You need to add suffix `_attachment` or `_attachments` where you use has_one_attached or has_many_attached.
 
 Otherwise, you can use `suffix` option as below.
 ```ruby
