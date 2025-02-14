@@ -29,7 +29,7 @@ Add some attributes to migration file, like name, email, age, ...etc.<br />
 And excute `bundle exec rails db:migrate`. That's all.<br />
 <br />
 Or if you already have User model, and you want introduce soft delete in it,
-create migration file and add lines like bellow
+create migration file and add lines like below
 ```ruby
 class AddSoftDeleterAttributesToUsers < ActiveRecord::Migration[7.0]
   def change
@@ -52,12 +52,12 @@ end
 This line is added automatically if you use `rails g soft_deleter user` command to make user model.
 
 ### scope
-When you load users whitout soft deleted records, you need to scope like bellow.
+When you load users whitout soft deleted records, you need to scope like below.
 ```ruby
 users = User.enabled.all
 ```
 If you don't use enabled scope, you will load users in all records including soft deleted.<br />
-Otherwise, if you need to load records with soft deleted, excute like bellow.
+Otherwise, if you need to load records with soft deleted, excute like below.
 ```ruby
 deleted_users = User.deleted.all
 ```
@@ -113,6 +113,48 @@ So, if you excute `user.soft_delete`, then associations books, and sections are 
 And excute `user.restore`, then associations books, and sections are restored.<br />
 It works with dependent destroy descriptions. If not, it doesn't work.
 
+
+## Exclude Dependent
+In the case where Active Storage is used, you will want exclude destroying files.<br />
+You can exclude dependents by `exclude_dependent` as below.
+```ruby
+# has_one_attached
+class User < ApplicationRecord
+  include SoftDeleter
+
+  has_one_attached :avatar
+  exclude_dependent :avatar_attachment # this line
+end
+
+# has_many_attached
+class Book < ApplicationRecord
+  include SoftDeleter
+  belongs_to :user
+  has_many_attached :images
+
+  exclude_dependent :images_attachments
+end
+```
+`exclude_dependent` accepts array of symbols as arguments.
+
+Otherwise, you can use `suffix` option as below.
+```ruby
+class User < ApplicationRecord
+  include SoftDeleter
+
+  has_one_attached :avatar
+  has_one_attached :somefile
+  exclude_dependent %i(avatar somefile), suffix: :attachment # this line
+end
+
+class Book < ApplicationRecord
+  include SoftDeleter
+  belongs_to :user
+  has_many_attached :images
+
+  exclude_dependent :images, suffix: :attachments
+end
+```
 
 ## Contributing
 Contribution directions go here.
