@@ -135,7 +135,7 @@ class Book < ApplicationRecord
   exclude_dependent :images_attachments # this line
 end
 ```
-`exclude_dependent` accepts array of symbols as arguments.
+`exclude_dependent` accepts array of symbols as arguments.<br />
 You need to add suffix `_attachment` or `_attachments` where you use has_one_attached or has_many_attached.
 
 Otherwise, you can use `suffix` option as below.
