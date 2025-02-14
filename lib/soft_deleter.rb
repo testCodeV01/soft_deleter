@@ -23,7 +23,7 @@ module SoftDeleter
 
     def exclude_dependent(names, option = {})
       dependents = [names].flatten
-      dependents = dependents.map { |name| :"#{name}_#{option.dig(:sufix)}" } if option.dig(:sufix).present?
+      dependents = dependents.map { |name| :"#{name}_#{option.dig(:suffix)}" } if option.dig(:suffix).present?
 
       @@exclude_dependents += dependents
     end

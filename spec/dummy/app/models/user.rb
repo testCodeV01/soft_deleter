@@ -3,10 +3,10 @@ class User < ApplicationRecord
 
   has_many :books, dependent: :destroy
   has_one_attached :avatar
-  has_many_attached :pdf
+  has_many_attached :pdfs
 
-  exclude_dependent :pdf, sufix: :attachments
-  exclude_dependent :avatar, sufix: :attachment
+  exclude_dependent :pdfs, suffix: :attachments
+  exclude_dependent :avatar, suffix: :attachment
 
   validates :name, presence: true
 end

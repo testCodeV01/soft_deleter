@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    soft_deleter (0.6.0)
+    soft_deleter (0.6.1)
       rails (>= 7.0.7)
 
 GEM
